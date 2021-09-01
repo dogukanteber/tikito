@@ -7,12 +7,13 @@ tikito is a Tic Tac Toe game playing against an AI. The AI player is implemented
 
 ### Compile & Run
 ```
-    git clone <insert git url here>
+    git clone https://github.com/dogukanteber/tikito.git
+    cd tikito
     gcc main.c -o main && ./main
 ```
 
 ### Dependencies
-The program is currently tested on Ubuntu OS. There should not be any problem running this game on any Unix system. However, trying to run the program may result an error since as stated above, it uses Unix color codes.
+The program is currently tested on Ubuntu OS. There should not be any problem running this game on any Unix system. However, trying to run the program on Windows may result to an error since as stated above, it uses Unix color codes.
 
 ### Licence
 Released under the revised  GNU GENERAL PUBLIC LICENSE. See [LICENSE](LICENSE) for details.
