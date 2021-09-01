@@ -1,6 +1,6 @@
 # tikito
 
-< insert the gif of the game >
+![Overview](tictactoe.gif)
 
 ### Description
 tikito is a Tic Tac Toe game playing against an AI. The AI player is implemented using Minimax algorithm. The rules are no different than the normal Tic Tac Toe game. The game comes with colors only if you are using a Unix system since the program uses Unix color codes. 
