@@ -30,7 +30,7 @@ static const char COMPUTER = 'O';
 static const char BLANK = ' ';
 
 void init_board(char* board) {
-    for ( int i=0; i<BOARD_SIZE; ++i ) {
+    for ( size_t i=0; i<BOARD_SIZE; ++i ) {
         board[i] = BLANK;
     }
 }
@@ -58,13 +58,13 @@ void print_colored_char(char c) {
         printf(RED " %c " RESET, c);
 }
 
-void print_board(char* board) {
+void print_board(const char* board) {
     printf("\n");
 
-    for ( int i=0; i<BOARD_SIZE; ++i ) {
+    for ( size_t i=0; i<BOARD_SIZE; ++i ) {
         if ( board[i] == BLANK ) {
             print_colored_pipe();
-            printf(YEL" %d " RESET, i+1);
+            printf(YEL" %ld " RESET, i+1);
         }
         else {
             print_colored_pipe();
@@ -79,16 +79,16 @@ void print_board(char* board) {
     printf("\n");
 }
 
-bool is_board_filled(char* board) {
-    for ( int i=0; i<BOARD_SIZE; ++i ) {
+bool is_board_filled(const char* board) {
+    for ( size_t i=0; i<BOARD_SIZE; ++i ) {
         if ( board[i] == BLANK )
             return false;
     }
     return true;
 }
 
-bool is_row_win(char* board, char player) {
-    for ( int i=0; i<BOARD_SIZE; i+= 3 ) {
+bool is_row_win(const char* board, char player) {
+    for ( size_t i=0; i<BOARD_SIZE; i+= 3 ) {
         if ( board[i] == board[i+1] && board[i+1] == board[i+2] ) {
             if ( board[i] == player ) {
                 return true;
@@ -98,8 +98,8 @@ bool is_row_win(char* board, char player) {
     return false;
 }
 
-bool is_col_win(char* board, char player) {
-    for ( int i=0; i<BOARD_SIZE / 3; ++i ) {
+bool is_col_win(const char* board, char player) {
+    for ( size_t i=0; i<BOARD_SIZE / 3; ++i ) {
         if ( board[i] == board[i+3] && board[i+3] == board[i+6] ) {
             if ( board[i] == player ) {
                 return true;
@@ -109,7 +109,7 @@ bool is_col_win(char* board, char player) {
     return false;
 }
 
-bool is_left_diag_win(char* board, char player) {
+bool is_left_diag_win(const char* board, char player) {
     if ( board[2] == board[4] && board[4] == board[6] ) {
         if ( board[2] == player ) {
             return true;
@@ -118,7 +118,7 @@ bool is_left_diag_win(char* board, char player) {
     return false;
 }
 
-bool is_right_diag_win(char* board, char player) {
+bool is_right_diag_win(const char* board, char player) {
     if ( board[0] == board[4] && board[4] == board[8] ) {
         if ( board[0] == player ) {
             return true;
@@ -127,7 +127,7 @@ bool is_right_diag_win(char* board, char player) {
     return false;
 }
 
-bool is_win(char* board, char player) {
+bool is_win(const char* board, char player) {
     if ( is_row_win(board, player) || is_col_win(board, player) ||
         is_right_diag_win(board, player) || is_left_diag_win(board, player) ) {
             return true;
@@ -137,18 +137,18 @@ bool is_win(char* board, char player) {
 }
 
 // Checks whether the game is ended or not
-bool is_terminal_state(char* board) {
+bool is_terminal_state(const char* board) {
     if ( is_win(board, COMPUTER) || is_win(board, HUMAN) || is_board_filled(board) )
         return true;
     else
         return false;
 }
 
-bool is_empty(char* board, int i) {
+bool is_empty(const char* board, int i) {
     return board[i] == BLANK;
 }
 
-void who_won(char* board) {
+void who_won(const char* board) {
     printf("%s", "Game is over. ");
 
     if ( is_win(board, HUMAN) )
@@ -165,7 +165,7 @@ void who_won(char* board) {
     if the player wins, returns -10 as score
     if no one wins, it returns 0.
 */
-int evaluate(char* board) {
+int evaluate(const char* board) {
     if ( is_win(board, HUMAN) ) {
             return -10;
         }
@@ -230,7 +230,7 @@ int find_optimal_move(char* board) {
     int best_val = INT_MIN;
     int move;
 
-    for ( int i=0; i<BOARD_SIZE; ++i ) {
+    for ( size_t i=0; i<BOARD_SIZE; ++i ) {
         if ( is_empty(board, i) ) {
             board[i] = COMPUTER;
             // triggers minimax algorithm for every possible spot
